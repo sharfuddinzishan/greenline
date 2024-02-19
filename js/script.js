@@ -47,16 +47,26 @@ document
   });
 
 document
+  .getElementById("customer-name")
+  .addEventListener("input", formSubmitButton);
+document.getElementById("email").addEventListener("input", formSubmitButton);
+document
   .getElementById("phone-number")
-  .addEventListener("keyup", function (event) {
-    const number = event.target.value;
-    const deleteButtons = document.getElementById("next-button");
-    if (number === number) {
-      deleteButtons.removeAttribute("disabled");
-    } else {
-      deleteButtons.setAttribute("disabled", true);
-    }
-  });
+  .addEventListener("input", formSubmitButton);
+
+// Enable Button Based on Input
+function formSubmitButton() {
+  const name = document.getElementById("customer-name").value;
+  const email = document.getElementById("email").value;
+  const phone = document.getElementById("phone-number").value;
+  const submitButton = document.getElementById("next-button");
+
+  if (name.length && phone.length == 11 && email.length > 6) {
+    submitButton.disabled = false;
+  } else {
+    submitButton.disabled = true;
+  }
+}
 
 // apply button hidden function
 function applyButton() {
@@ -68,7 +78,6 @@ const buttons = document.getElementsByClassName("clickbtn");
 // Add selected Seat Number
 const selectedSeats = {};
 for (let button of buttons) {
-  console.log(button);
   button.addEventListener("click", function (e) {
     const newButtonsText = newButtons.innerText;
     const newSeats = parseInt(newButtonsText);

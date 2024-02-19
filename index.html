@@ -913,13 +913,14 @@
               </section>
               <!-- Input-area -->
 
-              <form class="inter-font" action="">
+              <form id="form" class="inter-font" action="">
                 <label
                   for="name"
                   class="inter-font font-semibold text-base text-black"
                   >Passenger Name*
                 </label>
                 <input
+                  id="customer-name"
                   type="text"
                   placeholder="Enter your name"
                   class="input w-full border-gray-300 border border-solid focus:outline-none my-2"
@@ -931,7 +932,7 @@
                 >
                 <input
                   id="phone-number"
-                  type="number"
+                  type="tel"
                   placeholder="Enter your phone number"
                   class="input w-full border-gray-300 border border-solid focus:outline-none my-2"
                 />
@@ -941,14 +942,15 @@
                   >Email Id*</label
                 >
                 <input
-                  type="text"
+                  id="email"
+                  type="email"
                   placeholder="Enter your email id"
                   class="input w-full border-gray-300 border border-solid focus:outline-none mt-2"
                 />
                 <button
                   disabled
+                  type="submit"
                   id="next-button"
-                  onclick="modalSection()"
                   class="btn bg-[#1DD100] w-full bg-prime p-3 border-none rounded-lg raleway-font text-lg font-bold text-white my-6"
                 >
                   Next

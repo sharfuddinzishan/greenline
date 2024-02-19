@@ -23,17 +23,21 @@ document
   .getElementById("delete-confirm")
   .addEventListener("keyup", function (event) {
     const text = event.target.value;
+    const totalSeatBookedText =
+      document.getElementById("current-seat").innerText;
+    const totalSeatBooked = parseInt(totalSeatBookedText);
     const deleteButton = document.getElementById("apply-button");
     const totalText = document.getElementById("total").innerText;
     const total = parseInt(totalText);
     // 15% Coupon
-    if (text === "NEW15") {
+    console.log("total ", totalSeatBooked);
+    if (text === "NEW15" && totalSeatBooked === 4) {
       const totalAfterDiscount = parseInt(total - (total * 15) / 100);
       document.getElementById("grand-total").innerText = totalAfterDiscount;
       deleteButton.removeAttribute("disabled");
     }
     // 20% coupon
-    else if (text === "Couple 20") {
+    else if (text === "Couple 20" && totalSeatBooked === 4) {
       const totalAfterDiscount = parseInt(total - (total * 20) / 100);
       document.getElementById("grand-total").innerText = totalAfterDiscount;
       deleteButton.removeAttribute("disabled");

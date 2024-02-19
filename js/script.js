@@ -143,7 +143,7 @@ const addToSeatList = function (e, newButtonValue) {
   const addNewRow = document.createElement("tr");
   addNewRow.id = `row-${e.target.id}`;
   addNewRow.innerHTML = `
-    <td id="table-data" class="py-2">A${newButtonValue}</td>
+    <td id="table-data" class="py-2">${e.target.id}</td>
     <td>Economy</td>
     <td class="singleSeatPrice text-right">550</td>
   `;

@@ -26,11 +26,14 @@ document
     const deleteButton = document.getElementById("apply-button");
     const totalText = document.getElementById("total").innerText;
     const total = parseInt(totalText);
+    // 15% Coupon
     if (text === "NEW15") {
       const totalAfterDiscount = parseInt(total - (total * 15) / 100);
       document.getElementById("grand-total").innerText = totalAfterDiscount;
       deleteButton.removeAttribute("disabled");
-    } else if (text === "Couple 20") {
+    }
+    // 20% coupon
+    else if (text === "Couple 20") {
       const totalAfterDiscount = parseInt(total - (total * 20) / 100);
       document.getElementById("grand-total").innerText = totalAfterDiscount;
       deleteButton.removeAttribute("disabled");
@@ -58,15 +61,19 @@ function applyButton() {
 }
 
 const buttons = document.getElementsByClassName("clickbtn");
+// Add selected Seat Number
 const selectedSeats = {};
 for (let button of buttons) {
   button.addEventListener("click", function (e) {
     const newButtonsText = newButtons.innerText;
     const newSeats = parseInt(newButtonsText);
     if (newSeats >= 4) {
+      // If user booked 4 seat then only added seat can be removed
       if (selectedSeats[e.target.id]) {
         removeSeat(e, newSeats);
-        selectedSeats[e.target.id] = false; // Mark seat as not booked
+        // add false if seat booking cancelled
+        selectedSeats[e.target.id] = false;
+        // Change Seat Button ackground and text color
         toggleSeatButton(e);
       } else {
         alert("You can book only four seats");
@@ -76,21 +83,24 @@ for (let button of buttons) {
       // Check seat already booked
       if (selectedSeats[e.target.id]) {
         removeSeat(e, newSeats);
-        selectedSeats[e.target.id] = false; // Mark seat as not booked
+        selectedSeats[e.target.id] = false;
       } else {
         addSeat(e, newSeats);
-        selectedSeats[e.target.id] = true; // Mark seat as selected
+        // add selected seat
+        selectedSeats[e.target.id] = true;
       }
     }
   });
 }
 
+// Seat Button Background Color change
 const toggleSeatButton = function (e) {
   var element = document.getElementById(e.target.id);
   element.classList.toggle("bg-[#1DD100]");
   element.classList.toggle("text-white");
 };
 
+// Add seat by click on button
 const addSeat = function (e, seatOrderCount) {
   console.log("Added Seat");
   const newButtonValue = seatOrderCount + 1;
@@ -100,10 +110,13 @@ const addSeat = function (e, seatOrderCount) {
   const availableSeatElement = availableSeat.innerText;
   const available = parseInt(availableSeatElement);
   const updateSeat = available - 1;
+  // Add seat to table
   addToSeatList(e, newButtonValue);
+  // Update total available seat from 40 seats
   availableSeat.innerText = updateSeat;
 };
 
+// Remove seat by click on button
 const removeSeat = function (e, seatOrderCount) {
   console.log("Remove Seat");
   const newButtonValue = seatOrderCount - 1;
@@ -113,10 +126,13 @@ const removeSeat = function (e, seatOrderCount) {
   const availableSeatElement = availableSeat.innerText;
   const available = parseInt(availableSeatElement);
   const updateSeat = available + 1;
+  // Remove seat to table
   removeFromSeatList(e);
+  // Update total available seat from 40 seats
   availableSeat.innerText = updateSeat;
 };
 
+// Add seat to table
 const addToSeatList = function (e, newButtonValue) {
   console.log("Seat Added To Table");
   const tbody = document.querySelector("tbody");
@@ -131,6 +147,7 @@ const addToSeatList = function (e, newButtonValue) {
   totalPrice();
 };
 
+// remove seat from table
 const removeFromSeatList = function (e) {
   console.log("Seat Removed From Table");
   const rowToRemove = document.getElementById(`row-${e.target.id}`);
@@ -138,14 +155,18 @@ const removeFromSeatList = function (e) {
   totalPrice();
 };
 
+// Calculate total amount from table
 const totalPrice = function () {
   let total = 0;
   const tbody = document.querySelector("tbody");
+  // Get all table rows
   const rows = tbody.querySelectorAll("tr");
   for (let i = 0; i < rows.length; i++) {
     const getPrice = rows[i].querySelector(".singleSeatPrice");
     total += parseInt(getPrice.textContent);
   }
+  // Update Total
   document.getElementById("total").innerText = total;
+  // Update Grand Total
   document.getElementById("grand-total").innerText = total;
 };

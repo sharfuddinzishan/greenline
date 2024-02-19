@@ -68,6 +68,7 @@ const buttons = document.getElementsByClassName("clickbtn");
 // Add selected Seat Number
 const selectedSeats = {};
 for (let button of buttons) {
+  console.log(button);
   button.addEventListener("click", function (e) {
     const newButtonsText = newButtons.innerText;
     const newSeats = parseInt(newButtonsText);

@@ -24,12 +24,15 @@ document
   .addEventListener("keyup", function (event) {
     const text = event.target.value;
     const deleteButton = document.getElementById("apply-button");
-    if (text === "NEW15" || text === "Couple 20") {
-      const totalText = document.getElementById("total").innerText;
-      const total = parseInt(totalText);
-
-      document.getElementById("grand-total").innerText = total;
-
+    const totalText = document.getElementById("total").innerText;
+    const total = parseInt(totalText);
+    if (text === "NEW15") {
+      const totalAfterDiscount = parseInt(total - (total * 15) / 100);
+      document.getElementById("grand-total").innerText = totalAfterDiscount;
+      deleteButton.removeAttribute("disabled");
+    } else if (text === "Couple 20") {
+      const totalAfterDiscount = parseInt(total - (total * 20) / 100);
+      document.getElementById("grand-total").innerText = totalAfterDiscount;
       deleteButton.removeAttribute("disabled");
     } else {
       deleteButton.setAttribute("disabled", true);
